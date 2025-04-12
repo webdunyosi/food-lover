@@ -1,621 +1,809 @@
 <!DOCTYPE html>
 <!-- HTML5 document type declaration -->
 <html lang="en" class="scroll-smooth">
+  <head>
+    <!-- Meta tags for character encoding and responsive viewport -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Food Lover</title>
+    <!-- External CSS links for icons and fonts -->
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
+    <!-- Tailwind CSS -->
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <!-- Axios Link -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
 
-<head>
-  <!-- Meta tags for character encoding and responsive viewport -->
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Food Lover</title>
-  <!-- External CSS links for icons and fonts -->
-  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
-  <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
-  <!-- Tailwind CSS -->
-  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-</head>
-
-<body style="font-family: 'Quicksand', sans-serif" class="bg-white">
-  <!-- Loader -->
-  <div id="loader-wrapper"
-    class="w-full h-screen flex justify-center items-center z-50 bg-amber-800 fixed top-0 bottom-0 left-0 right-0">
-    <span class="loader"></span>
-  </div>
-  <!-- Hero Section with Background Image -->
-  <div class="relative">
-    <!-- Background Image Layer -->
-    <div class="absolute inset-0 bg-[url('images/home_bg.jpeg')] bg-cover bg-center bg-no-repeat"></div>
-    <!-- Dark Overlay Layer -->
-    <div class="absolute inset-0 bg-black/50"></div>
-    <!-- Content Layer -->
+  <body style="font-family: 'Quicksand', sans-serif" class="bg-white">
+    <!-- Loader -->
+    <div
+      id="loader-wrapper"
+      class="w-full h-screen flex justify-center items-center z-50 bg-amber-800 fixed top-0 bottom-0 left-0 right-0"
+    >
+      <span class="loader"></span>
+    </div>
+    <!-- Hero Section with Background Image -->
     <div class="relative">
-      <!-- Navigation Bar -->
+      <!-- Background Image Layer -->
       <div
-        class="fixed top-0 left-0 right-0 z-10 backdrop-blur-3xl bg-black/50 shadow-lg shadow-black/50 flex flex-col md:flex-row justify-between items-center px-[5%] md:px-[10%] py-0">
-        <div class="flex justify-between items-center w-full md:w-auto">
-          <img class="w-16 md:w-20" src="images/logo.png" alt="logo" />
-          <button id="menuBtn" class="md:hidden text-white text-2xl cursor-pointer">
-            <i class="bx bx-menu"></i>
-          </button>
+        class="absolute inset-0 bg-[url('images/home_bg.jpeg')] bg-cover bg-center bg-no-repeat"
+      ></div>
+      <!-- Dark Overlay Layer -->
+      <div class="absolute inset-0 bg-black/50"></div>
+      <!-- Content Layer -->
+      <div class="relative">
+        <!-- Navigation Bar -->
+        <div
+          class="fixed top-0 left-0 right-0 z-10 backdrop-blur-3xl bg-black/50 shadow-lg shadow-black/50 flex flex-col md:flex-row justify-between items-center px-[5%] md:px-[10%] py-0"
+        >
+          <div class="flex justify-between items-center w-full md:w-auto">
+            <img class="w-16 md:w-20" src="images/logo.png" alt="logo" />
+            <button
+              id="menuBtn"
+              class="md:hidden text-white text-2xl cursor-pointer"
+            >
+              <i class="bx bx-menu"></i>
+            </button>
+          </div>
+          <!-- Navigation Links -->
+          <div
+            id="navLinks"
+            class="hidden md:flex flex-col md:flex-row gap-2 md:gap-4 text-sm md:text-base font-bold text-white m-4 md:m-0 w-full md:w-auto"
+          >
+            <a
+              href="#"
+              class="hover:text-yellow-500 transition duration-300 border-b-2 border-transparent hover:border-yellow-500"
+              >Home</a
+            >
+            <a
+              href="#about"
+              class="hover:text-yellow-500 transition duration-300 border-b-2 border-transparent hover:border-yellow-500"
+              >About</a
+            >
+            <a
+              href="#menu"
+              class="hover:text-yellow-500 transition duration-300 border-b-2 border-transparent hover:border-yellow-500"
+              >Menu</a
+            >
+            <a
+              href="#gallery"
+              class="hover:text-yellow-500 transition duration-300 border-b-2 border-transparent hover:border-yellow-500"
+              >Gallery</a
+            >
+            <a
+              href="#contact"
+              class="hover:text-yellow-500 transition duration-300 border-b-2 border-transparent hover:border-yellow-500"
+              >Contact</a
+            >
+          </div>
         </div>
-        <!-- Navigation Links -->
-        <div id="navLinks"
-          class="hidden md:flex flex-col md:flex-row gap-2 md:gap-4 text-sm md:text-base font-bold text-white m-4 md:m-0 w-full md:w-auto">
-          <a href="#"
-            class="hover:text-yellow-500 transition duration-300 border-b-2 border-transparent hover:border-yellow-500">Home</a>
-          <a href="#about"
-            class="hover:text-yellow-500 transition duration-300 border-b-2 border-transparent hover:border-yellow-500">About</a>
-          <a href="#menu"
-            class="hover:text-yellow-500 transition duration-300 border-b-2 border-transparent hover:border-yellow-500">Menu</a>
-          <a href="#gallery"
-            class="hover:text-yellow-500 transition duration-300 border-b-2 border-transparent hover:border-yellow-500">Gallery</a>
-          <a href="#contact"
-            class="hover:text-yellow-500 transition duration-300 border-b-2 border-transparent hover:border-yellow-500">Contact</a>
+        <!-- Hero Content -->
+        <div
+          class="text-white px-[5%] md:px-[10%] py-4 h-screen flex flex-col justify-center items-center text-center"
+        >
+          <h1 class="text-2xl md:text-4xl font-bold mb-4">
+            Welcome To
+            <span class="text-yellow-500">Food Lover</span> Restaurant
+          </h1>
+          <p class="text-base md:text-lg mb-4">
+            Here you can find Most delicacies food in the world
+          </p>
+          <!-- Call to Action Buttons -->
+          <div class="flex flex-col md:flex-row gap-4">
+            <button
+              class="bg-yellow-500 text-white cursor-pointer px-4 md:px-6 py-2 md:py-3 rounded-full uppercase font-bold hover:bg-yellow-600 transition duration-300 ease-in-out flex items-center justify-center gap-2 shadow-lg hover:shadow-yellow-500 text-sm md:text-base"
+            >
+              read more
+              <i class="bx bx-right-arrow-alt bx-fade-left text-xl"></i>
+            </button>
+            <button
+              data-modal
+              class="bg-yellow-500 text-white cursor-pointer px-4 md:px-6 py-2 md:py-3 rounded-full uppercase font-bold hover:bg-yellow-600 transition duration-300 ease-in-out flex items-center justify-center gap-2 shadow-lg hover:shadow-yellow-500 text-sm md:text-base"
+            >
+              contact us
+              <i class="bx bx-phone-call bx-tada"></i>
+            </button>
+          </div>
         </div>
       </div>
-      <!-- Hero Content -->
-      <div class="text-white px-[5%] md:px-[10%] py-4 h-screen flex flex-col justify-center items-center text-center">
-        <h1 class="text-2xl md:text-4xl font-bold mb-4">
-          Welcome To
-          <span class="text-yellow-500">Food Lover</span> Restaurant
-        </h1>
-        <p class="text-base md:text-lg mb-4">
-          Here you can find Most delicacies food in the world
+    </div>
+    <script>
+      const menuBtn = document.getElementById("menuBtn")
+      const navLinks = document.getElementById("navLinks")
+
+      menuBtn.addEventListener("click", () => {
+        navLinks.classList.toggle("hidden")
+      })
+    </script>
+
+    <!-- About Section -->
+    <div id="about" class="px-[5%] md:px-[10%] py-8 md:py-16 text-center">
+      <h2 class="text-2xl md:text-4xl font-bold mb-4">
+        The Food Lover history
+      </h2>
+      <p class="text-gray-600 mb-8">More than 25+ years of experience</p>
+      <!-- Location Buttons Tabs -->
+      <div
+        id="locationTabs"
+        class="flex flex-wrap justify-center gap-2 md:gap-4 mb-8 bg-gradient-to-r from-yellow-50 to-yellow-200 p-3 rounded-xl shadow-md"
+      >
+        <button
+          class="px-4 md:px-6 py-2 rounded-lg border-2 cursor-pointer border-yellow-500 bg-yellow-500 text-white transition duration-300 shadow-sm hover:shadow-lg hover:shadow-yellow-700 text-sm md:text-base"
+        >
+          Paris
+        </button>
+        <button
+          class="px-4 md:px-6 py-2 rounded-lg border-2 cursor-pointer border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-white transition duration-300 shadow-sm hover:shadow-lg hover:shadow-yellow-700 text-sm md:text-base"
+        >
+          London
+        </button>
+        <button
+          class="px-4 md:px-6 py-2 rounded-lg border-2 cursor-pointer border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-white transition duration-300 shadow-sm hover:shadow-lg hover:shadow-yellow-700 text-sm md:text-base"
+        >
+          Dubai
+        </button>
+        <button
+          class="px-4 md:px-6 py-2 rounded-lg border-2 cursor-pointer border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-white transition duration-300 shadow-sm hover:shadow-lg hover:shadow-yellow-700 text-sm md:text-base"
+        >
+          Moscow
+        </button>
+        <button
+          class="px-4 md:px-6 py-2 rounded-lg border-2 cursor-pointer border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-white transition duration-300 shadow-sm hover:shadow-lg hover:shadow-yellow-700 text-sm md:text-base"
+        >
+          Tashkent
+        </button>
+      </div>
+      <div id="tabContainer">
+        <!-- Paris Content -->
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-20 items-center transition-all duration-500 ease-in-out transform opacity-0 translate-y-4"
+        >
+          <div>
+            <h3 class="text-4xl font-bold text-yellow-500 mb-4 text-left">
+              Paris
+            </h3>
+            <p class="text-gray-600 leading-relaxed text-justify mb-4">
+              <span class="text-yellow-500 font-bold">Paris</span> is home to
+              some of the world's finest culinary traditions. Our restaurant
+              brings authentic Parisian flavors and ambiance to your dining
+              experience. With carefully selected ingredients and time-honored
+              recipes passed down through generations, we create memorable
+              dishes that transport you to the charming streets of Paris.
+            </p>
+            <p class="text-gray-600 leading-relaxed text-justify">
+              Our expert chefs combine classical French techniques with modern
+              innovation to deliver an exceptional dining experience that honors
+              both tradition and creativity.
+            </p>
+          </div>
+          <img src="images/about_img.png" alt="about" class="w-full" />
+        </div>
+
+        <!-- London Content -->
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-20 items-center transition-all duration-500 ease-in-out transform opacity-0 translate-y-4"
+        >
+          <div>
+            <h3 class="text-4xl font-bold text-yellow-500 mb-4 text-left">
+              London
+            </h3>
+            <p class="text-gray-600 leading-relaxed text-justify mb-4">
+              <span class="text-yellow-500 font-bold">London</span> brings
+              together diverse culinary influences from around the world. Our
+              London location celebrates this rich tapestry of flavors, offering
+              both traditional British cuisine and innovative fusion dishes.
+              Using locally sourced ingredients from Borough Market, we create
+              dishes that reflect London's status as a global culinary capital.
+            </p>
+            <p class="text-gray-600 leading-relaxed text-justify">
+              Experience the sophistication of modern British dining while
+              enjoying our warm, welcoming atmosphere in the heart of London.
+            </p>
+          </div>
+          <img
+            src="images/about_london.jpg"
+            alt="about london"
+            class="w-full rounded-4xl"
+          />
+        </div>
+
+        <!-- Dubai Content -->
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-20 items-center transition-all duration-500 ease-in-out transform opacity-0 translate-y-4"
+        >
+          <div>
+            <h3 class="text-4xl font-bold text-yellow-500 mb-4 text-left">
+              Dubai
+            </h3>
+            <p class="text-gray-600 leading-relaxed text-justify mb-4">
+              <span class="text-yellow-500 font-bold">Dubai</span> represents
+              luxury and innovation in the culinary world. Our Dubai location
+              combines traditional Middle Eastern flavors with contemporary
+              gastronomy. Situated in a stunning setting with views of the Burj
+              Khalifa, we offer an unforgettable dining experience that matches
+              the city's grandeur.
+            </p>
+            <p class="text-gray-600 leading-relaxed text-justify">
+              Our menu features both local delicacies and international
+              favorites, prepared with the finest ingredients from around the
+              globe.
+            </p>
+          </div>
+          <img
+            src="images/about_dubai.png"
+            alt="about dubai"
+            class="w-full rounded-4xl"
+          />
+        </div>
+
+        <!-- Moscow Content -->
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-20 items-center transition-all duration-500 ease-in-out transform opacity-0 translate-y-4"
+        >
+          <div>
+            <h3 class="text-4xl font-bold text-yellow-500 mb-4 text-left">
+              Moscow
+            </h3>
+            <p class="text-gray-600 leading-relaxed text-justify mb-4">
+              <span class="text-yellow-500 font-bold">Moscow</span> embodies the
+              rich traditions of Russian cuisine. Our Moscow restaurant
+              celebrates the warmth of Russian hospitality and the depth of its
+              culinary heritage. Located in a historic building, we serve both
+              classic Russian dishes and modern interpretations of traditional
+              favorites.
+            </p>
+            <p class="text-gray-600 leading-relaxed text-justify">
+              Each dish tells a story of Russian culture, prepared with seasonal
+              ingredients and served with our signature attention to detail.
+            </p>
+          </div>
+          <img
+            src="images/about_moscow.jpg"
+            alt="about moscow"
+            class="w-full rounded-4xl"
+          />
+        </div>
+
+        <!-- Tashkent Content -->
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-20 items-center transition-all duration-500 ease-in-out transform opacity-0 translate-y-4"
+        >
+          <div>
+            <h3 class="text-4xl font-bold text-yellow-500 mb-4 text-left">
+              Tashkent
+            </h3>
+            <p class="text-gray-600 leading-relaxed text-justify mb-4">
+              <span class="text-yellow-500 font-bold">Tashkent</span> showcases
+              the authentic flavors of Uzbek cuisine. Our Tashkent location
+              brings together centuries-old Central Asian recipes with modern
+              culinary techniques. We take pride in our traditional dishes like
+              plov, shashlik, and samsa, prepared in authentic style using local
+              ingredients.
+            </p>
+            <p class="text-gray-600 leading-relaxed text-justify">
+              Experience the legendary Uzbek hospitality and immerse yourself in
+              the rich flavors of Central Asian cuisine.
+            </p>
+          </div>
+          <img
+            src="images/about_tashkent.jpeg"
+            alt="about tashkent"
+            class="w-full rounded-4xl"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Special Offers Section -->
+    <div
+      class="px-[5%] md:px-[10%] py-8 md:py-16 text-center bg-[url('images/offer-background.jpg')] bg-cover bg-center bg-no-repeat bg-fixed"
+    >
+      <h2 class="text-2xl md:text-4xl font-bold mb-4 text-yellow-500">
+        Our Special Offers
+      </h2>
+      <p class="text-white">More than 25+ years of experience</p>
+      <!-- Offers Grid -->
+      <div
+        id="offer"
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 mt-10"
+      ></div>
+    </div>
+
+    <!-- Menu Section -->
+    <div id="menu" class="px-[5%] md:px-[10%] py-8 md:py-16">
+      <h2 class="text-2xl md:text-4xl font-bold mb-4 text-center">
+        Our Special Menu
+      </h2>
+      <p class="text-gray-600 mb-8 md:mb-14 text-center">
+        Order two and get third for free
+      </p>
+      <!-- Menu Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12">
+        <!-- Menu Item 1 -->
+        <div
+          class="flex flex-col md:flex-row items-center gap-4 shadow-lg hover:shadow-yellow-500 duration-300 p-4 rounded-lg"
+        >
+          <img
+            class="h-20 w-20 md:h-28 md:w-28 rounded-full"
+            src="images/food1.png"
+            alt="food"
+          />
+          <div class="text-center md:text-left">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+              <h3 class="text-lg font-bold">JUMBO CRAB SHRIMP</h3>
+              <p class="text-yellow-500 font-bold">$24.00</p>
+            </div>
+            <div class="border-dashed border-t-2 border-gray-300 my-2"></div>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. At,
+              explicabo.
+            </p>
+          </div>
+        </div>
+
+        <!-- Menu Item 2 -->
+        <div
+          class="flex flex-col md:flex-row items-center gap-4 shadow-lg hover:shadow-yellow-500 duration-300 p-4 rounded-lg"
+        >
+          <img
+            class="h-20 w-20 md:h-28 md:w-28 rounded-full"
+            src="images/food2.png"
+            alt="food"
+          />
+          <div class="text-center md:text-left">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+              <h3 class="text-lg font-bold">GRILLED CHICKEN</h3>
+              <p class="text-yellow-500 font-bold">$22.00</p>
+            </div>
+            <div class="border-dashed border-t-2 border-gray-300 my-2"></div>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. At,
+              explicabo.
+            </p>
+          </div>
+        </div>
+
+        <!-- Menu Item 3 -->
+        <div
+          class="flex flex-col md:flex-row items-center gap-4 shadow-lg hover:shadow-yellow-500 duration-300 p-4 rounded-lg"
+        >
+          <img
+            class="h-20 w-20 md:h-28 md:w-28 rounded-full"
+            src="images/food3.png"
+            alt="food"
+          />
+          <div class="text-center md:text-left">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+              <h3 class="text-lg font-bold">SEAFOOD PASTA</h3>
+              <p class="text-yellow-500 font-bold">$26.00</p>
+            </div>
+            <div class="border-dashed border-t-2 border-gray-300 my-2"></div>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. At,
+              explicabo.
+            </p>
+          </div>
+        </div>
+
+        <!-- Menu Item 4 -->
+        <div
+          class="flex flex-col md:flex-row items-center gap-4 shadow-lg hover:shadow-yellow-500 duration-300 p-4 rounded-lg"
+        >
+          <img
+            class="h-20 w-20 md:h-28 md:w-28 rounded-full"
+            src="images/food4.png"
+            alt="food"
+          />
+          <div class="text-center md:text-left">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+              <h3 class="text-lg font-bold">BEEF STEAK</h3>
+              <p class="text-yellow-500 font-bold">$28.00</p>
+            </div>
+            <div class="border-dashed border-t-2 border-gray-300 my-2"></div>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. At,
+              explicabo.
+            </p>
+          </div>
+        </div>
+
+        <!-- Menu Item 5 -->
+        <div
+          class="flex flex-col md:flex-row items-center gap-4 shadow-lg hover:shadow-yellow-500 duration-300 p-4 rounded-lg"
+        >
+          <img
+            class="h-20 w-20 md:h-28 md:w-28 rounded-full"
+            src="images/food5.png"
+            alt="food"
+          />
+          <div class="text-center md:text-left">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+              <h3 class="text-lg font-bold">SALMON FILLET</h3>
+              <p class="text-yellow-500 font-bold">$25.00</p>
+            </div>
+            <div class="border-dashed border-t-2 border-gray-300 my-2"></div>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. At,
+              explicabo.
+            </p>
+          </div>
+        </div>
+
+        <!-- Menu Item 6 -->
+        <div
+          class="flex flex-col md:flex-row items-center gap-4 shadow-lg hover:shadow-yellow-500 duration-300 p-4 rounded-lg"
+        >
+          <img
+            class="h-20 w-20 md:h-28 md:w-28 rounded-full"
+            src="images/food6.png"
+            alt="food"
+          />
+          <div class="text-center md:text-left">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+              <h3 class="text-lg font-bold">VEGETABLE CURRY</h3>
+              <p class="text-yellow-500 font-bold">$20.00</p>
+            </div>
+            <div class="border-dashed border-t-2 border-gray-300 my-2"></div>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. At,
+              explicabo.
+            </p>
+          </div>
+        </div>
+
+        <!-- Menu Item 7 -->
+        <div
+          class="flex flex-col md:flex-row items-center gap-4 shadow-lg hover:shadow-yellow-500 duration-300 p-4 rounded-lg"
+        >
+          <img
+            class="h-20 w-20 md:h-28 md:w-28 rounded-full"
+            src="images/food7.jpeg"
+            alt="food"
+          />
+          <div class="text-center md:text-left">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+              <h3 class="text-lg font-bold">MUSHROOM RISOTTO</h3>
+              <p class="text-yellow-500 font-bold">$23.00</p>
+            </div>
+            <div class="border-dashed border-t-2 border-gray-300 my-2"></div>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. At,
+              explicabo.
+            </p>
+          </div>
+        </div>
+
+        <!-- Menu Item 8 -->
+        <div
+          class="flex flex-col md:flex-row items-center gap-4 shadow-lg hover:shadow-yellow-500 duration-300 p-4 rounded-lg"
+        >
+          <img
+            class="h-20 w-20 md:h-28 md:w-28 rounded-full"
+            src="images/food8.jpeg"
+            alt="food"
+          />
+          <div class="text-center md:text-left">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+              <h3 class="text-lg font-bold">PORK CHOPS</h3>
+              <p class="text-yellow-500 font-bold">$27.00</p>
+            </div>
+            <div class="border-dashed border-t-2 border-gray-300 my-2"></div>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. At,
+              explicabo.
+            </p>
+          </div>
+        </div>
+
+        <!-- Menu Item 9 -->
+        <div
+          class="flex flex-col md:flex-row items-center gap-4 shadow-lg hover:shadow-yellow-500 duration-300 p-4 rounded-lg"
+        >
+          <img
+            class="h-20 w-20 md:h-28 md:w-28 rounded-full"
+            src="images/food9.jpeg"
+            alt="food"
+          />
+          <div class="text-center md:text-left">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+              <h3 class="text-lg font-bold">DUCK CONFIT</h3>
+              <p class="text-yellow-500 font-bold">$30.00</p>
+            </div>
+            <div class="border-dashed border-t-2 border-gray-300 my-2"></div>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. At,
+              explicabo.
+            </p>
+          </div>
+        </div>
+
+        <!-- Menu Item 10 -->
+        <div
+          class="flex flex-col md:flex-row items-center gap-4 shadow-lg hover:shadow-yellow-500 duration-300 p-4 rounded-lg"
+        >
+          <img
+            class="h-20 w-20 md:h-28 md:w-28 rounded-full"
+            src="images/food10.jpeg"
+            alt="food"
+          />
+          <div class="text-center md:text-left">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+              <h3 class="text-lg font-bold">LAMB KEBAB</h3>
+              <p class="text-yellow-500 font-bold">$29.00</p>
+            </div>
+            <div class="border-dashed border-t-2 border-gray-300 my-2"></div>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. At,
+              explicabo.
+            </p>
+          </div>
+        </div>
+
+        <!-- Menu Item 11 -->
+        <div
+          class="flex flex-col md:flex-row items-center gap-4 shadow-lg hover:shadow-yellow-500 duration-300 p-4 rounded-lg"
+        >
+          <img
+            class="h-20 w-20 md:h-28 md:w-28 rounded-full"
+            src="images/food11.jpeg"
+            alt="food"
+          />
+          <div class="text-center md:text-left">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+              <h3 class="text-lg font-bold">TUNA TARTARE</h3>
+              <p class="text-yellow-500 font-bold">$26.00</p>
+            </div>
+            <div class="border-dashed border-t-2 border-gray-300 my-2"></div>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. At,
+              explicabo.
+            </p>
+          </div>
+        </div>
+
+        <!-- Menu Item 12 -->
+        <div
+          class="flex flex-col md:flex-row items-center gap-4 shadow-lg hover:shadow-yellow-500 duration-300 p-4 rounded-lg"
+        >
+          <img
+            class="h-20 w-20 md:h-28 md:w-28 rounded-full"
+            src="images/food12.jpeg"
+            alt="food"
+          />
+          <div class="text-center md:text-left">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+              <h3 class="text-lg font-bold">VEGAN BOWL</h3>
+              <p class="text-yellow-500 font-bold">$21.00</p>
+            </div>
+            <div class="border-dashed border-t-2 border-gray-300 my-2"></div>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. At,
+              explicabo.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- Menu Action Buttons -->
+      <div class="flex flex-col md:flex-row justify-center gap-4 mt-8">
+        <button
+          class="bg-yellow-500 text-white cursor-pointer px-4 md:px-6 py-2 md:py-3 rounded-full uppercase font-bold hover:bg-yellow-600 transition duration-300 ease-in-out flex items-center justify-center gap-2 shadow-lg hover:shadow-yellow-500 text-sm md:text-base"
+        >
+          read more
+          <i class="bx bx-right-arrow-alt bx-fade-left text-xl"></i>
+        </button>
+        <button
+          data-modal
+          class="bg-yellow-500 text-white cursor-pointer px-4 md:px-6 py-2 md:py-3 rounded-full uppercase font-bold hover:bg-yellow-600 transition duration-300 ease-in-out flex items-center justify-center gap-2 shadow-lg hover:shadow-yellow-500 text-sm md:text-base"
+        >
+          contact us
+          <i class="bx bx-phone-call bx-tada"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Meal Times Section -->
+    <div
+      id="meal"
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-[5%] md:px-[10%] py-8 md:py-16 bg-[url('images/daytime_bg.jpeg')] bg-cover bg-center bg-no-repeat bg-fixed"
+    ></div>
+
+    <!-- Gallery Section -->
+    <div
+      id="gallery"
+      class="px-[5%] md:px-[10%] py-8 md:py-16 bg-[url('images/offer-background.jpg')] bg-cover bg-center bg-no-repeat"
+    >
+      <!-- Gallery Navigation -->
+      <div class="flex items-center justify-center md:justify-start gap-4 mb-8">
+        <img
+          class="cursor-pointer w-8 md:w-auto"
+          src="images/left.svg"
+          alt="left"
+        />
+        <p
+          class="text-white text-2xl md:text-3xl font-bold flex items-center gap-2"
+        >
+          <span class="text-yellow-500 text-4xl md:text-5xl">03 </span>/ 05
         </p>
-        <!-- Call to Action Buttons -->
-        <div class="flex flex-col md:flex-row gap-4">
+        <img
+          class="cursor-pointer w-8 md:w-auto"
+          src="images/right.svg"
+          alt="right"
+        />
+      </div>
+      <!-- Gallery Content -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div
+          class="h-48 md:h-auto bg-[url('images/gallery1.jpeg')] border-2 border-yellow-500 rounded-4xl bg-cover bg-center bg-no-repeat"
+        ></div>
+        <div class="p-5 text-white">
+          <h2 class="text-2xl md:text-4xl font-bold mb-4">Our Food Gallery</h2>
+          <p class="mb-4 text-sm md:text-base">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae
+            obcaecati ea maxime esse suscipit at veritatis corporis, est dicta
+            repellat cupiditate. Cupiditate corrupti illum, necessitatibus saepe
+            non ab placeat fugiat?
+          </p>
+          <p class="mb-4 text-sm md:text-base">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae
+            obcaecati ea maxime esse suscipit at veritatis corporis, est dicta
+            repellat cupiditate. Cupiditate corrupti illum, necessitatibus saepe
+            non ab placeat fugiat?
+          </p>
           <button
-            class="bg-yellow-500 text-white cursor-pointer px-4 md:px-6 py-2 md:py-3 rounded-full uppercase font-bold hover:bg-yellow-600 transition duration-300 ease-in-out flex items-center justify-center gap-2 shadow-lg hover:shadow-yellow-500 text-sm md:text-base">
-            read more
-            <i class="bx bx-right-arrow-alt bx-fade-left text-xl"></i>
-          </button>
-          <button data-modal
-            class="bg-yellow-500 text-white cursor-pointer px-4 md:px-6 py-2 md:py-3 rounded-full uppercase font-bold hover:bg-yellow-600 transition duration-300 ease-in-out flex items-center justify-center gap-2 shadow-lg hover:shadow-yellow-500 text-sm md:text-base">
+            data-modal
+            class="bg-yellow-500 text-white cursor-pointer px-4 md:px-6 py-2 md:py-3 rounded-full uppercase font-bold hover:bg-yellow-600 transition duration-300 ease-in-out flex items-center justify-center gap-2 shadow-lg hover:shadow-yellow-500 text-sm md:text-base"
+          >
             contact us
             <i class="bx bx-phone-call bx-tada"></i>
           </button>
         </div>
       </div>
     </div>
-  </div>
-  <script>
-    const menuBtn = document.getElementById("menuBtn")
-    const navLinks = document.getElementById("navLinks")
 
-    menuBtn.addEventListener("click", () => {
-      navLinks.classList.toggle("hidden")
-    })
-  </script>
-
-  <!-- About Section -->
-  <div id="about" class="px-[5%] md:px-[10%] py-8 md:py-16 text-center">
-    <h2 class="text-2xl md:text-4xl font-bold mb-4">
-      The Food Lover history
-    </h2>
-    <p class="text-gray-600 mb-8">More than 25+ years of experience</p>
-    <!-- Location Buttons Tabs -->
-    <div id="locationTabs"
-      class="flex flex-wrap justify-center gap-2 md:gap-4 mb-8 bg-gradient-to-r from-yellow-50 to-yellow-200 p-3 rounded-xl shadow-md">
-      <button
-        class="px-4 md:px-6 py-2 rounded-lg border-2 cursor-pointer border-yellow-500 bg-yellow-500 text-white transition duration-300 shadow-sm hover:shadow-lg hover:shadow-yellow-700 text-sm md:text-base">
-        Paris
-      </button>
-      <button
-        class="px-4 md:px-6 py-2 rounded-lg border-2 cursor-pointer border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-white transition duration-300 shadow-sm hover:shadow-lg hover:shadow-yellow-700 text-sm md:text-base">
-        London
-      </button>
-      <button
-        class="px-4 md:px-6 py-2 rounded-lg border-2 cursor-pointer border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-white transition duration-300 shadow-sm hover:shadow-lg hover:shadow-yellow-700 text-sm md:text-base">
-        Dubai
-      </button>
-      <button
-        class="px-4 md:px-6 py-2 rounded-lg border-2 cursor-pointer border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-white transition duration-300 shadow-sm hover:shadow-lg hover:shadow-yellow-700 text-sm md:text-base">
-        Moscow
-      </button>
-      <button
-        class="px-4 md:px-6 py-2 rounded-lg border-2 cursor-pointer border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-white transition duration-300 shadow-sm hover:shadow-lg hover:shadow-yellow-700 text-sm md:text-base">
-        Tashkent
-      </button>
-    </div>
-    <div id="tabContainer">
-      <!-- Paris Content -->
-      <div
-        class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-20 items-center transition-all duration-500 ease-in-out transform opacity-0 translate-y-4">
-        <div>
-          <h3 class="text-4xl font-bold text-yellow-500 mb-4 text-left">
-            Paris
-          </h3>
-          <p class="text-gray-600 leading-relaxed text-justify mb-4">
-            <span class="text-yellow-500 font-bold">Paris</span> is home to
-            some of the world's finest culinary traditions. Our restaurant
-            brings authentic Parisian flavors and ambiance to your dining
-            experience. With carefully selected ingredients and time-honored
-            recipes passed down through generations, we create memorable
-            dishes that transport you to the charming streets of Paris.
+    <!-- Contact Information Section -->
+    <div
+      id="contact"
+      class="px-[5%] md:px-[10%] py-8 md:py-16 bg-white bg-cover bg-center bg-no-repeat"
+    >
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Address Section -->
+        <div class="text-black text-center md:text-left">
+          <h3 class="text-2xl md:text-3xl font-bold mb-4">ADDRESS</h3>
+          <p
+            class="mb-2 text-sm md:text-base flex items-center justify-center md:justify-start gap-2"
+          >
+            <i class="text-yellow-500 bx bx-map"></i> Hosary Mosque, 6 October,
+            Egypt
           </p>
-          <p class="text-gray-600 leading-relaxed text-justify">
-            Our expert chefs combine classical French techniques with modern
-            innovation to deliver an exceptional dining experience that honors
-            both tradition and creativity.
+          <p
+            class="mb-2 text-sm md:text-base flex items-center justify-center md:justify-start gap-2"
+          >
+            <i class="text-yellow-500 bx bx-phone"></i> Phone: 123456789
+          </p>
+          <p
+            class="mb-2 text-sm md:text-base flex items-center justify-center md:justify-start gap-2"
+          >
+            <i class="text-yellow-500 bx bx-envelope"></i> support@foodlover.com
           </p>
         </div>
-        <img src="images/about_img.png" alt="about" class="w-full" />
-      </div>
 
-      <!-- London Content -->
-      <div
-        class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-20 items-center transition-all duration-500 ease-in-out transform opacity-0 translate-y-4">
-        <div>
-          <h3 class="text-4xl font-bold text-yellow-500 mb-4 text-left">
-            London
-          </h3>
-          <p class="text-gray-600 leading-relaxed text-justify mb-4">
-            <span class="text-yellow-500 font-bold">London</span> brings
-            together diverse culinary influences from around the world. Our
-            London location celebrates this rich tapestry of flavors, offering
-            both traditional British cuisine and innovative fusion dishes.
-            Using locally sourced ingredients from Borough Market, we create
-            dishes that reflect London's status as a global culinary capital.
+        <!-- Working Hours Section -->
+        <div class="text-black text-center md:text-left">
+          <h3 class="text-2xl md:text-3xl font-bold mb-4">WORKING HOURS</h3>
+          <p class="mb-2 text-sm md:text-base">
+            8:00 am to 11:00 pm on Weekdays
           </p>
-          <p class="text-gray-600 leading-relaxed text-justify">
-            Experience the sophistication of modern British dining while
-            enjoying our warm, welcoming atmosphere in the heart of London.
+          <p class="mb-2 text-sm md:text-base">
+            11:00 am to 1:00 Am on Weekends
           </p>
         </div>
-        <img src="images/about_london.jpg" alt="about london" class="w-full rounded-4xl" />
-      </div>
 
-      <!-- Dubai Content -->
-      <div
-        class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-20 items-center transition-all duration-500 ease-in-out transform opacity-0 translate-y-4">
-        <div>
-          <h3 class="text-4xl font-bold text-yellow-500 mb-4 text-left">
-            Dubai
-          </h3>
-          <p class="text-gray-600 leading-relaxed text-justify mb-4">
-            <span class="text-yellow-500 font-bold">Dubai</span> represents
-            luxury and innovation in the culinary world. Our Dubai location
-            combines traditional Middle Eastern flavors with contemporary
-            gastronomy. Situated in a stunning setting with views of the Burj
-            Khalifa, we offer an unforgettable dining experience that matches
-            the city's grandeur.
-          </p>
-          <p class="text-gray-600 leading-relaxed text-justify">
-            Our menu features both local delicacies and international
-            favorites, prepared with the finest ingredients from around the
-            globe.
-          </p>
-        </div>
-        <img src="images/about_dubai.png" alt="about dubai" class="w-full rounded-4xl" />
-      </div>
-
-      <!-- Moscow Content -->
-      <div
-        class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-20 items-center transition-all duration-500 ease-in-out transform opacity-0 translate-y-4">
-        <div>
-          <h3 class="text-4xl font-bold text-yellow-500 mb-4 text-left">
-            Moscow
-          </h3>
-          <p class="text-gray-600 leading-relaxed text-justify mb-4">
-            <span class="text-yellow-500 font-bold">Moscow</span> embodies the
-            rich traditions of Russian cuisine. Our Moscow restaurant
-            celebrates the warmth of Russian hospitality and the depth of its
-            culinary heritage. Located in a historic building, we serve both
-            classic Russian dishes and modern interpretations of traditional
-            favorites.
-          </p>
-          <p class="text-gray-600 leading-relaxed text-justify">
-            Each dish tells a story of Russian culture, prepared with seasonal
-            ingredients and served with our signature attention to detail.
-          </p>
-        </div>
-        <img src="images/about_moscow.jpg" alt="about moscow" class="w-full rounded-4xl" />
-      </div>
-
-      <!-- Tashkent Content -->
-      <div
-        class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-20 items-center transition-all duration-500 ease-in-out transform opacity-0 translate-y-4">
-        <div>
-          <h3 class="text-4xl font-bold text-yellow-500 mb-4 text-left">
-            Tashkent
-          </h3>
-          <p class="text-gray-600 leading-relaxed text-justify mb-4">
-            <span class="text-yellow-500 font-bold">Tashkent</span> showcases
-            the authentic flavors of Uzbek cuisine. Our Tashkent location
-            brings together centuries-old Central Asian recipes with modern
-            culinary techniques. We take pride in our traditional dishes like
-            plov, shashlik, and samsa, prepared in authentic style using local
-            ingredients.
-          </p>
-          <p class="text-gray-600 leading-relaxed text-justify">
-            Experience the legendary Uzbek hospitality and immerse yourself in
-            the rich flavors of Central Asian cuisine.
-          </p>
-        </div>
-        <img src="images/about_tashkent.jpeg" alt="about tashkent" class="w-full rounded-4xl" />
-      </div>
-    </div>
-  </div>
-
-  <!-- Special Offers Section -->
-  <div
-    class="px-[5%] md:px-[10%] py-8 md:py-16 text-center bg-[url('images/offer-background.jpg')] bg-cover bg-center bg-no-repeat bg-fixed">
-    <h2 class="text-2xl md:text-4xl font-bold mb-4 text-yellow-500">
-      Our Special Offers
-    </h2>
-    <p class="text-white">More than 25+ years of experience</p>
-    <!-- Offers Grid -->
-    <div id="offer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 mt-10"></div>
-  </div>
-
-  <!-- Menu Section -->
-  <div id="menu" class="px-[5%] md:px-[10%] py-8 md:py-16">
-    <h2 class="text-2xl md:text-4xl font-bold mb-4 text-center">
-      Our Special Menu
-    </h2>
-    <p class="text-gray-600 mb-8 md:mb-14 text-center">
-      Order two and get third for free
-    </p>
-    <!-- Menu Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12">
-      <!-- Menu Item 1 -->
-      <div
-        class="flex flex-col md:flex-row items-center gap-4 shadow-lg hover:shadow-yellow-500 duration-300 p-4 rounded-lg">
-        <img class="h-20 w-20 md:h-28 md:w-28 rounded-full" src="images/food1.png" alt="food" />
-        <div class="text-center md:text-left">
-          <div class="flex flex-col md:flex-row justify-between items-center">
-            <h3 class="text-lg font-bold">JUMBO CRAB SHRIMP</h3>
-            <p class="text-yellow-500 font-bold">$24.00</p>
+        <!-- Coming Soon Counter -->
+        <div class="text-black text-center md:text-left">
+          <h3 class="text-2xl md:text-3xl font-bold mb-4">Coming soon</h3>
+          <div id="timer" class="grid grid-cols-4 gap-2 md:gap-4 text-center">
+            <div class="bg-black/50 p-2 md:p-4 rounded-lg">
+              <p
+                id="days"
+                class="text-2xl md:text-4xl font-bold text-yellow-500"
+              >
+                99
+              </p>
+              <p class="text-white text-sm md:text-base">day</p>
+            </div>
+            <div class="animate-bounce bg-black/50 p-2 md:p-4 rounded-lg">
+              <p
+                id="hours"
+                class="text-2xl md:text-4xl font-bold text-yellow-500"
+              >
+                09
+              </p>
+              <p class="text-white text-sm md:text-base">hours</p>
+            </div>
+            <div class="bg-black/50 p-2 md:p-4 rounded-lg">
+              <p
+                id="minutes"
+                class="text-2xl md:text-4xl font-bold text-yellow-500"
+              >
+                99
+              </p>
+              <p class="text-white text-sm md:text-base">minutes</p>
+            </div>
+            <div class="animate-bounce bg-black/50 p-2 md:p-4 rounded-lg">
+              <p
+                id="seconds"
+                class="text-2xl md:text-4xl font-bold text-yellow-500"
+              >
+                09
+              </p>
+              <p class="text-white text-sm md:text-base">seconds</p>
+            </div>
           </div>
-          <div class="border-dashed border-t-2 border-gray-300 my-2"></div>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. At,
-            explicabo.
-          </p>
-        </div>
-      </div>
-
-      <!-- Menu Item 2 -->
-      <div
-        class="flex flex-col md:flex-row items-center gap-4 shadow-lg hover:shadow-yellow-500 duration-300 p-4 rounded-lg">
-        <img class="h-20 w-20 md:h-28 md:w-28 rounded-full" src="images/food2.png" alt="food" />
-        <div class="text-center md:text-left">
-          <div class="flex flex-col md:flex-row justify-between items-center">
-            <h3 class="text-lg font-bold">GRILLED CHICKEN</h3>
-            <p class="text-yellow-500 font-bold">$22.00</p>
-          </div>
-          <div class="border-dashed border-t-2 border-gray-300 my-2"></div>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. At,
-            explicabo.
-          </p>
-        </div>
-      </div>
-
-      <!-- Menu Item 3 -->
-      <div
-        class="flex flex-col md:flex-row items-center gap-4 shadow-lg hover:shadow-yellow-500 duration-300 p-4 rounded-lg">
-        <img class="h-20 w-20 md:h-28 md:w-28 rounded-full" src="images/food3.png" alt="food" />
-        <div class="text-center md:text-left">
-          <div class="flex flex-col md:flex-row justify-between items-center">
-            <h3 class="text-lg font-bold">SEAFOOD PASTA</h3>
-            <p class="text-yellow-500 font-bold">$26.00</p>
-          </div>
-          <div class="border-dashed border-t-2 border-gray-300 my-2"></div>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. At,
-            explicabo.
-          </p>
-        </div>
-      </div>
-
-      <!-- Menu Item 4 -->
-      <div
-        class="flex flex-col md:flex-row items-center gap-4 shadow-lg hover:shadow-yellow-500 duration-300 p-4 rounded-lg">
-        <img class="h-20 w-20 md:h-28 md:w-28 rounded-full" src="images/food4.png" alt="food" />
-        <div class="text-center md:text-left">
-          <div class="flex flex-col md:flex-row justify-between items-center">
-            <h3 class="text-lg font-bold">BEEF STEAK</h3>
-            <p class="text-yellow-500 font-bold">$28.00</p>
-          </div>
-          <div class="border-dashed border-t-2 border-gray-300 my-2"></div>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. At,
-            explicabo.
-          </p>
-        </div>
-      </div>
-
-      <!-- Menu Item 5 -->
-      <div
-        class="flex flex-col md:flex-row items-center gap-4 shadow-lg hover:shadow-yellow-500 duration-300 p-4 rounded-lg">
-        <img class="h-20 w-20 md:h-28 md:w-28 rounded-full" src="images/food5.png" alt="food" />
-        <div class="text-center md:text-left">
-          <div class="flex flex-col md:flex-row justify-between items-center">
-            <h3 class="text-lg font-bold">SALMON FILLET</h3>
-            <p class="text-yellow-500 font-bold">$25.00</p>
-          </div>
-          <div class="border-dashed border-t-2 border-gray-300 my-2"></div>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. At,
-            explicabo.
-          </p>
-        </div>
-      </div>
-
-      <!-- Menu Item 6 -->
-      <div
-        class="flex flex-col md:flex-row items-center gap-4 shadow-lg hover:shadow-yellow-500 duration-300 p-4 rounded-lg">
-        <img class="h-20 w-20 md:h-28 md:w-28 rounded-full" src="images/food6.png" alt="food" />
-        <div class="text-center md:text-left">
-          <div class="flex flex-col md:flex-row justify-between items-center">
-            <h3 class="text-lg font-bold">VEGETABLE CURRY</h3>
-            <p class="text-yellow-500 font-bold">$20.00</p>
-          </div>
-          <div class="border-dashed border-t-2 border-gray-300 my-2"></div>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. At,
-            explicabo.
-          </p>
-        </div>
-      </div>
-
-      <!-- Menu Item 7 -->
-      <div
-        class="flex flex-col md:flex-row items-center gap-4 shadow-lg hover:shadow-yellow-500 duration-300 p-4 rounded-lg">
-        <img class="h-20 w-20 md:h-28 md:w-28 rounded-full" src="images/food7.jpeg" alt="food" />
-        <div class="text-center md:text-left">
-          <div class="flex flex-col md:flex-row justify-between items-center">
-            <h3 class="text-lg font-bold">MUSHROOM RISOTTO</h3>
-            <p class="text-yellow-500 font-bold">$23.00</p>
-          </div>
-          <div class="border-dashed border-t-2 border-gray-300 my-2"></div>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. At,
-            explicabo.
-          </p>
-        </div>
-      </div>
-
-      <!-- Menu Item 8 -->
-      <div
-        class="flex flex-col md:flex-row items-center gap-4 shadow-lg hover:shadow-yellow-500 duration-300 p-4 rounded-lg">
-        <img class="h-20 w-20 md:h-28 md:w-28 rounded-full" src="images/food8.jpeg" alt="food" />
-        <div class="text-center md:text-left">
-          <div class="flex flex-col md:flex-row justify-between items-center">
-            <h3 class="text-lg font-bold">PORK CHOPS</h3>
-            <p class="text-yellow-500 font-bold">$27.00</p>
-          </div>
-          <div class="border-dashed border-t-2 border-gray-300 my-2"></div>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. At,
-            explicabo.
-          </p>
-        </div>
-      </div>
-
-      <!-- Menu Item 9 -->
-      <div
-        class="flex flex-col md:flex-row items-center gap-4 shadow-lg hover:shadow-yellow-500 duration-300 p-4 rounded-lg">
-        <img class="h-20 w-20 md:h-28 md:w-28 rounded-full" src="images/food9.jpeg" alt="food" />
-        <div class="text-center md:text-left">
-          <div class="flex flex-col md:flex-row justify-between items-center">
-            <h3 class="text-lg font-bold">DUCK CONFIT</h3>
-            <p class="text-yellow-500 font-bold">$30.00</p>
-          </div>
-          <div class="border-dashed border-t-2 border-gray-300 my-2"></div>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. At,
-            explicabo.
-          </p>
-        </div>
-      </div>
-
-      <!-- Menu Item 10 -->
-      <div
-        class="flex flex-col md:flex-row items-center gap-4 shadow-lg hover:shadow-yellow-500 duration-300 p-4 rounded-lg">
-        <img class="h-20 w-20 md:h-28 md:w-28 rounded-full" src="images/food10.jpeg" alt="food" />
-        <div class="text-center md:text-left">
-          <div class="flex flex-col md:flex-row justify-between items-center">
-            <h3 class="text-lg font-bold">LAMB KEBAB</h3>
-            <p class="text-yellow-500 font-bold">$29.00</p>
-          </div>
-          <div class="border-dashed border-t-2 border-gray-300 my-2"></div>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. At,
-            explicabo.
-          </p>
-        </div>
-      </div>
-
-      <!-- Menu Item 11 -->
-      <div
-        class="flex flex-col md:flex-row items-center gap-4 shadow-lg hover:shadow-yellow-500 duration-300 p-4 rounded-lg">
-        <img class="h-20 w-20 md:h-28 md:w-28 rounded-full" src="images/food11.jpeg" alt="food" />
-        <div class="text-center md:text-left">
-          <div class="flex flex-col md:flex-row justify-between items-center">
-            <h3 class="text-lg font-bold">TUNA TARTARE</h3>
-            <p class="text-yellow-500 font-bold">$26.00</p>
-          </div>
-          <div class="border-dashed border-t-2 border-gray-300 my-2"></div>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. At,
-            explicabo.
-          </p>
-        </div>
-      </div>
-
-      <!-- Menu Item 12 -->
-      <div
-        class="flex flex-col md:flex-row items-center gap-4 shadow-lg hover:shadow-yellow-500 duration-300 p-4 rounded-lg">
-        <img class="h-20 w-20 md:h-28 md:w-28 rounded-full" src="images/food12.jpeg" alt="food" />
-        <div class="text-center md:text-left">
-          <div class="flex flex-col md:flex-row justify-between items-center">
-            <h3 class="text-lg font-bold">VEGAN BOWL</h3>
-            <p class="text-yellow-500 font-bold">$21.00</p>
-          </div>
-          <div class="border-dashed border-t-2 border-gray-300 my-2"></div>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. At,
-            explicabo.
-          </p>
         </div>
       </div>
     </div>
-    <!-- Menu Action Buttons -->
-    <div class="flex flex-col md:flex-row justify-center gap-4 mt-8">
-      <button
-        class="bg-yellow-500 text-white cursor-pointer px-4 md:px-6 py-2 md:py-3 rounded-full uppercase font-bold hover:bg-yellow-600 transition duration-300 ease-in-out flex items-center justify-center gap-2 shadow-lg hover:shadow-yellow-500 text-sm md:text-base">
-        read more
-        <i class="bx bx-right-arrow-alt bx-fade-left text-xl"></i>
-      </button>
-      <button data-modal
-        class="bg-yellow-500 text-white cursor-pointer px-4 md:px-6 py-2 md:py-3 rounded-full uppercase font-bold hover:bg-yellow-600 transition duration-300 ease-in-out flex items-center justify-center gap-2 shadow-lg hover:shadow-yellow-500 text-sm md:text-base">
-        contact us
-        <i class="bx bx-phone-call bx-tada"></i>
-      </button>
-    </div>
-  </div>
 
-  <!-- Meal Times Section -->
-  <div id="meal"
-    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-[5%] md:px-[10%] py-8 md:py-16 bg-[url('images/daytime_bg.jpeg')] bg-cover bg-center bg-no-repeat bg-fixed">
-  </div>
-
-  <!-- Gallery Section -->
-  <div id="gallery"
-    class="px-[5%] md:px-[10%] py-8 md:py-16 bg-[url('images/offer-background.jpg')] bg-cover bg-center bg-no-repeat">
-    <!-- Gallery Navigation -->
-    <div class="flex items-center justify-center md:justify-start gap-4 mb-8">
-      <img class="cursor-pointer w-8 md:w-auto" src="images/left.svg" alt="left" />
-      <p class="text-white text-2xl md:text-3xl font-bold flex items-center gap-2">
-        <span class="text-yellow-500 text-4xl md:text-5xl">03 </span>/ 05
+    <!-- Footer -->
+    <footer class="bg-zinc-700 text-white text-center py-4">
+      <p class="text-sm md:text-base">
+        Copyright © 2025 All rights reserved | made by
+        <a
+          href="https://www.youtube.com/@webdunyo"
+          target="_blank"
+          class="text-yellow-500 font-bold"
+          >Webdunyosi</a
+        >
       </p>
-      <img class="cursor-pointer w-8 md:w-auto" src="images/right.svg" alt="right" />
-    </div>
-    <!-- Gallery Content -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div
-        class="h-48 md:h-auto bg-[url('images/gallery1.jpeg')] border-2 border-yellow-500 rounded-4xl bg-cover bg-center bg-no-repeat">
-      </div>
-      <div class="p-5 text-white">
-        <h2 class="text-2xl md:text-4xl font-bold mb-4">Our Food Gallery</h2>
-        <p class="mb-4 text-sm md:text-base">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae
-          obcaecati ea maxime esse suscipit at veritatis corporis, est dicta
-          repellat cupiditate. Cupiditate corrupti illum, necessitatibus saepe
-          non ab placeat fugiat?
-        </p>
-        <p class="mb-4 text-sm md:text-base">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae
-          obcaecati ea maxime esse suscipit at veritatis corporis, est dicta
-          repellat cupiditate. Cupiditate corrupti illum, necessitatibus saepe
-          non ab placeat fugiat?
-        </p>
-        <button data-modal
-          class="bg-yellow-500 text-white cursor-pointer px-4 md:px-6 py-2 md:py-3 rounded-full uppercase font-bold hover:bg-yellow-600 transition duration-300 ease-in-out flex items-center justify-center gap-2 shadow-lg hover:shadow-yellow-500 text-sm md:text-base">
-          contact us
-          <i class="bx bx-phone-call bx-tada"></i>
-        </button>
-      </div>
-    </div>
-  </div>
+    </footer>
 
-  <!-- Contact Information Section -->
-  <div id="contact" class="px-[5%] md:px-[10%] py-8 md:py-16 bg-white bg-cover bg-center bg-no-repeat">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <!-- Address Section -->
-      <div class="text-black text-center md:text-left">
-        <h3 class="text-2xl md:text-3xl font-bold mb-4">ADDRESS</h3>
-        <p class="mb-2 text-sm md:text-base flex items-center justify-center md:justify-start gap-2">
-          <i class="text-yellow-500 bx bx-map"></i> Hosary Mosque, 6 October,
-          Egypt
-        </p>
-        <p class="mb-2 text-sm md:text-base flex items-center justify-center md:justify-start gap-2">
-          <i class="text-yellow-500 bx bx-phone"></i> Phone: 123456789
-        </p>
-        <p class="mb-2 text-sm md:text-base flex items-center justify-center md:justify-start gap-2">
-          <i class="text-yellow-500 bx bx-envelope"></i> support@foodlover.com
-        </p>
-      </div>
-
-      <!-- Working Hours Section -->
-      <div class="text-black text-center md:text-left">
-        <h3 class="text-2xl md:text-3xl font-bold mb-4">WORKING HOURS</h3>
-        <p class="mb-2 text-sm md:text-base">
-          8:00 am to 11:00 pm on Weekdays
-        </p>
-        <p class="mb-2 text-sm md:text-base">
-          11:00 am to 1:00 Am on Weekends
-        </p>
-      </div>
-
-      <!-- Coming Soon Counter -->
-      <div class="text-black text-center md:text-left">
-        <h3 class="text-2xl md:text-3xl font-bold mb-4">Coming soon</h3>
-        <div id="timer" class="grid grid-cols-4 gap-2 md:gap-4 text-center">
-          <div class="bg-black/50 p-2 md:p-4 rounded-lg">
-            <p id="days" class="text-2xl md:text-4xl font-bold text-yellow-500">
-              99
-            </p>
-            <p class="text-white text-sm md:text-base">day</p>
-          </div>
-          <div class="animate-bounce bg-black/50 p-2 md:p-4 rounded-lg">
-            <p id="hours" class="text-2xl md:text-4xl font-bold text-yellow-500">
-              09
-            </p>
-            <p class="text-white text-sm md:text-base">hours</p>
-          </div>
-          <div class="bg-black/50 p-2 md:p-4 rounded-lg">
-            <p id="minutes" class="text-2xl md:text-4xl font-bold text-yellow-500">
-              99
-            </p>
-            <p class="text-white text-sm md:text-base">minutes</p>
-          </div>
-          <div class="animate-bounce bg-black/50 p-2 md:p-4 rounded-lg">
-            <p id="seconds" class="text-2xl md:text-4xl font-bold text-yellow-500">
-              09
-            </p>
-            <p class="text-white text-sm md:text-base">seconds</p>
-          </div>
-        </div>
+    <!-- Modal -->
+    <div
+      id="modal"
+      class="fixed top-0 left-0 w-full h-full bg-black/50 backdrop-blur-xl flex hidden opacity-0 items-center justify-center flex-col transition-opacity duration-500 z-50"
+    >
+      <div class="relative bg-white p-8 rounded-lg shadow-lg text-center">
+        <form action="">
+          <button
+            id="modalClose"
+            class="absolute top-4 right-4 text-3xl text-black cursor-pointer"
+          >
+            <i class="bx bx-x"></i>
+          </button>
+          <h2 class="text-3xl uppercase font-bold mb-5">Contact Us!</h2>
+          <input
+            class="w-full border-2 mb-3 py-2 px-5 rounded-full focus:outline-none focus:border-yellow-500 transition duration-300"
+            type="text"
+            name="name"
+            placeholder="Name"
+          />
+          <input
+            class="w-full border-2 mb-3 py-2 px-5 rounded-full focus:outline-none focus:border-yellow-500 transition duration-300"
+            type="tel"
+            name="phone"
+            placeholder="Phone"
+          />
+          <button
+            type="submit"
+            data-modal
+            class="w-full bg-yellow-500 text-white cursor-pointer px-4 md:px-6 py-2 md:py-3 rounded-full uppercase font-bold hover:bg-yellow-600 transition duration-300 ease-in-out flex items-center justify-center gap-2 shadow-lg hover:shadow-yellow-500 text-sm md:text-base"
+          >
+            contact us
+            <i class="bx bx-phone-call bx-tada"></i>
+          </button>
+        </form>
       </div>
     </div>
-  </div>
 
-  <!-- Footer -->
-  <footer class="bg-zinc-700 text-white text-center py-4">
-    <p class="text-sm md:text-base">
-      Copyright © 2025 All rights reserved | made by
-      <a href="https://www.youtube.com/@webdunyo" target="_blank" class="text-yellow-500 font-bold">Webdunyosi</a>
-    </p>
-  </footer>
-
-  <!-- Modal -->
-  <div id="modal"
-    class="fixed top-0 left-0 w-full h-full bg-black/50 backdrop-blur-xl flex hidden opacity-0 items-center justify-center flex-col transition-opacity duration-500 z-50">
-    <div class="relative bg-white p-8 rounded-lg shadow-lg text-center">
-      <button id="modalClose" class="absolute top-4 right-4 text-3xl text-black cursor-pointer">
-        <i class="bx bx-x"></i>
-      </button>
-      <h2 class="text-3xl uppercase font-bold mb-5">Contact Us!</h2>
-      <input
-        class="w-full border-2 mb-3 py-2 px-5 rounded-full focus:outline-none focus:border-yellow-500 transition duration-300"
-        type="text" placeholder="Name" />
-      <input
-        class="w-full border-2 mb-3 py-2 px-5 rounded-full focus:outline-none focus:border-yellow-500 transition duration-300"
-        type="tel" placeholder="Phone" />
-      <button type="submit" data-modal
-        class="w-full bg-yellow-500 text-white cursor-pointer px-4 md:px-6 py-2 md:py-3 rounded-full uppercase font-bold hover:bg-yellow-600 transition duration-300 ease-in-out flex items-center justify-center gap-2 shadow-lg hover:shadow-yellow-500 text-sm md:text-base">
-        contact us
-        <i class="bx bx-phone-call bx-tada"></i>
-      </button>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
-</body>
-
+    <script src="script.js"></script>
+  </body>
 </html>

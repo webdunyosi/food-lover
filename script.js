@@ -293,4 +293,53 @@ document.addEventListener("DOMContentLoaded", () => {
   ]
 
   meals.forEach((qiymat) => new MealMenu(qiymat).render())
+
+  // Form
+  let form = document.querySelector("form")
+  let telegramTokenBot = "7458632254:AAHXhIYOt73QDlREX8GMUGjklVziuD_kZMw"
+  let chatId = "5414733748"
+
+  let message = {
+    loading: "Loading...",
+    success: "Thanks for contacting with us",
+    failure: "Something went wrong",
+  }
+
+  form.addEventListener("submit", (evt) => {
+    evt.preventDefault()
+
+    let statusMessage = document.createElement("div")
+    statusMessage.textContent = message.loading
+    statusMessage.className =
+      "mt-5 px-4 py-2 rounded-xl text-sm font-medium text-white bg-blue-500 animate-pulse"
+    form.append(statusMessage)
+
+    let formData = new FormData(form)
+    let object = {}
+    formData.forEach((value, key) => {
+      object[key] = value
+    })
+
+    axios
+      .post(`https://api.telegram.org/bot${telegramTokenBot}/sendMessage`, {
+        chat_id: chatId,
+        text: `Name: ${object.name}\nPhone: ${object.phone}`,
+      })
+      .then(() => {
+        statusMessage.textContent = message.success
+        statusMessage.className =
+          "mt-5 px-4 py-2 rounded-xl text-sm font-medium text-white bg-green-500"
+        form.reset()
+      })
+      .catch(() => {
+        statusMessage.textContent = message.failure
+        statusMessage.className =
+          "mt-5 px-4 py-2 rounded-xl text-sm font-medium text-white bg-red-500"
+      })
+      .finally(() => {
+        setTimeout(() => {
+          statusMessage.remove()
+        }, 2500)
+      })
+  })
 })
