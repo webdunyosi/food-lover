@@ -297,7 +297,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Form
   let form = document.querySelector("form")
   let telegramTokenBot = "7458632254:AAHXhIYOt73QDlREX8GMUGjklVziuD_kZMw"
-  let chatId = "5414733748"
+  let chatId = "-1002642866542"
 
   let message = {
     loading: "Loading...",
@@ -310,31 +310,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let statusMessage = document.createElement("div")
     statusMessage.textContent = message.loading
-    statusMessage.className =
-      "mt-5 px-4 py-2 rounded-xl text-sm font-medium text-white bg-blue-500 animate-pulse"
+    statusMessage.classList = `mt-5 px-4 py-2 rounded-xl text-sm font-medium text-white bg-blue-500 animate-pulse`
     form.append(statusMessage)
 
     let formData = new FormData(form)
-    let object = {}
+
+    let obj = {}
     formData.forEach((value, key) => {
-      object[key] = value
+      obj[key] = value
     })
 
     axios
       .post(`https://api.telegram.org/bot${telegramTokenBot}/sendMessage`, {
         chat_id: chatId,
-        text: `Name: ${object.name}\nPhone: ${object.phone}`,
+        text: `📬 Yangi xabar:\n\n👤 Ism: ${obj.name}\n📞Telefon: ${obj.phone}`,
       })
       .then(() => {
         statusMessage.textContent = message.success
-        statusMessage.className =
-          "mt-5 px-4 py-2 rounded-xl text-sm font-medium text-white bg-green-500"
+        statusMessage.className = `mt-5 px-4 py-2 rounded-xl text-sm font-medium text-white bg-green-500`
         form.reset()
       })
       .catch(() => {
         statusMessage.textContent = message.failure
-        statusMessage.className =
-          "mt-5 px-4 py-2 rounded-xl text-sm font-medium text-white bg-red-500"
+        statusMessage.classList = `mt-5 px-4 py-2 rounded-xl text-sm font-medium text-white bg-red-500`
+        form.reset()
       })
       .finally(() => {
         setTimeout(() => {
