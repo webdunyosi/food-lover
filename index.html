@@ -619,53 +619,212 @@
 
     <!-- Gallery Section -->
     <div
-      id="gallery"
       class="px-[5%] md:px-[10%] py-8 md:py-16 bg-[url('images/offer-background.jpg')] bg-cover bg-center bg-no-repeat"
     >
       <!-- Gallery Navigation -->
       <div class="flex items-center justify-center md:justify-start gap-4 mb-8">
         <img
-          class="cursor-pointer w-8 md:w-auto"
+          id="galleryPrev"
+          class="cursor-pointer w-8 md:w-auto hover:scale-110 transition duration-300"
           src="images/left.svg"
           alt="left"
         />
         <p
           class="text-white text-2xl md:text-3xl font-bold flex items-center gap-2"
         >
-          <span class="text-yellow-500 text-4xl md:text-5xl">03 </span>/ 05
+          <span id="currentSlide" class="text-yellow-500 text-4xl md:text-5xl"
+            >01 </span
+          >/ <span id="totalSlides">06</span>
         </p>
         <img
-          class="cursor-pointer w-8 md:w-auto"
+          id="galleryNext"
+          class="cursor-pointer w-8 md:w-auto hover:scale-110 transition duration-300"
           src="images/right.svg"
           alt="right"
         />
       </div>
       <!-- Gallery Content -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="overflow-hidden relative">
         <div
-          class="h-48 md:h-auto bg-[url('images/gallery1.jpeg')] border-2 border-yellow-500 rounded-4xl bg-cover bg-center bg-no-repeat"
-        ></div>
-        <div class="p-5 text-white">
-          <h2 class="text-2xl md:text-4xl font-bold mb-4">Our Food Gallery</h2>
-          <p class="mb-4 text-sm md:text-base">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae
-            obcaecati ea maxime esse suscipit at veritatis corporis, est dicta
-            repellat cupiditate. Cupiditate corrupti illum, necessitatibus saepe
-            non ab placeat fugiat?
-          </p>
-          <p class="mb-4 text-sm md:text-base">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae
-            obcaecati ea maxime esse suscipit at veritatis corporis, est dicta
-            repellat cupiditate. Cupiditate corrupti illum, necessitatibus saepe
-            non ab placeat fugiat?
-          </p>
-          <button
-            data-modal
-            class="bg-yellow-500 text-white cursor-pointer px-4 md:px-6 py-2 md:py-3 rounded-full uppercase font-bold hover:bg-yellow-600 transition duration-300 ease-in-out flex items-center justify-center gap-2 shadow-lg hover:shadow-yellow-500 text-sm md:text-base"
-          >
-            contact us
-            <i class="bx bx-phone-call bx-tada"></i>
-          </button>
+          id="gallerySlider"
+          class="flex transition-transform duration-500 ease-in-out"
+        >
+          <!-- Slide 1 -->
+          <div class="min-w-full grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div
+              class="h-48 md:h-auto bg-[url('images/gallery1.jpeg')] border-2 border-yellow-500 rounded-4xl bg-cover bg-center bg-no-repeat"
+            ></div>
+            <div class="p-5 text-white">
+              <h2 class="text-2xl md:text-4xl font-bold mb-4">
+                Our Food Gallery
+              </h2>
+              <p class="mb-4 text-sm md:text-base">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae
+                obcaecati ea maxime esse suscipit at veritatis corporis, est
+                dicta repellat cupiditate. Cupiditate corrupti illum,
+                necessitatibus saepe non ab placeat fugiat?
+              </p>
+              <p class="mb-4 text-sm md:text-base">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae
+                obcaecati ea maxime esse suscipit at veritatis corporis, est
+                dicta repellat cupiditate. Cupiditate corrupti illum,
+                necessitatibus saepe non ab placeat fugiat?
+              </p>
+              <button
+                class="bg-yellow-500 text-white cursor-pointer px-4 md:px-6 py-2 md:py-3 rounded-full uppercase font-bold hover:bg-yellow-600 transition duration-300 ease-in-out flex items-center justify-center gap-2 shadow-lg hover:shadow-yellow-500 text-sm md:text-base"
+                data-modal
+              >
+                contact us
+                <i class="bx bx-phone-call bx-tada"></i>
+              </button>
+            </div>
+          </div>
+          <!-- Slide 2 -->
+          <div class="min-w-full grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div
+              class="h-48 md:h-auto bg-[url('images/gallery2.jpeg')] border-2 border-yellow-500 rounded-4xl bg-cover bg-center bg-no-repeat"
+            ></div>
+            <div class="p-5 text-white">
+              <h2 class="text-2xl md:text-4xl font-bold mb-4">
+                Delicious Dishes
+              </h2>
+              <p class="mb-4 text-sm md:text-base">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae
+                obcaecati ea maxime esse suscipit at veritatis corporis, est
+                dicta repellat cupiditate. Cupiditate corrupti illum,
+                necessitatibus saepe non ab placeat fugiat?
+              </p>
+              <p class="mb-4 text-sm md:text-base">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae
+                obcaecati ea maxime esse suscipit at veritatis corporis, est
+                dicta repellat cupiditate. Cupiditate corrupti illum,
+                necessitatibus saepe non ab placeat fugiat?
+              </p>
+              <button
+                class="bg-yellow-500 text-white cursor-pointer px-4 md:px-6 py-2 md:py-3 rounded-full uppercase font-bold hover:bg-yellow-600 transition duration-300 ease-in-out flex items-center justify-center gap-2 shadow-lg hover:shadow-yellow-500 text-sm md:text-base"
+                data-modal
+              >
+                contact us
+                <i class="bx bx-phone-call bx-tada"></i>
+              </button>
+            </div>
+          </div>
+          <!-- Slide 3 -->
+          <div class="min-w-full grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div
+              class="h-48 md:h-auto bg-[url('images/gallery3.jpeg')] border-2 border-yellow-500 rounded-4xl bg-cover bg-center bg-no-repeat"
+            ></div>
+            <div class="p-5 text-white">
+              <h2 class="text-2xl md:text-4xl font-bold mb-4">
+                Amazing Experience
+              </h2>
+              <p class="mb-4 text-sm md:text-base">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae
+                obcaecati ea maxime esse suscipit at veritatis corporis, est
+                dicta repellat cupiditate. Cupiditate corrupti illum,
+                necessitatibus saepe non ab placeat fugiat?
+              </p>
+              <p class="mb-4 text-sm md:text-base">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae
+                obcaecati ea maxime esse suscipit at veritatis corporis, est
+                dicta repellat cupiditate. Cupiditate corrupti illum,
+                necessitatibus saepe non ab placeat fugiat?
+              </p>
+              <button
+                class="bg-yellow-500 text-white cursor-pointer px-4 md:px-6 py-2 md:py-3 rounded-full uppercase font-bold hover:bg-yellow-600 transition duration-300 ease-in-out flex items-center justify-center gap-2 shadow-lg hover:shadow-yellow-500 text-sm md:text-base"
+                data-modal
+              >
+                contact us
+                <i class="bx bx-phone-call bx-tada"></i>
+              </button>
+            </div>
+          </div>
+          <!-- Slide 4 -->
+          <div class="min-w-full grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div
+              class="h-48 md:h-auto bg-[url('images/gallery4.jpeg')] border-2 border-yellow-500 rounded-4xl bg-cover bg-center bg-no-repeat"
+            ></div>
+            <div class="p-5 text-white">
+              <h2 class="text-2xl md:text-4xl font-bold mb-4">
+                Fresh Ingredients
+              </h2>
+              <p class="mb-4 text-sm md:text-base">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae
+                obcaecati ea maxime esse suscipit at veritatis corporis, est
+                dicta repellat cupiditate. Cupiditate corrupti illum,
+                necessitatibus saepe non ab placeat fugiat?
+              </p>
+              <p class="mb-4 text-sm md:text-base">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae
+                obcaecati ea maxime esse suscipit at veritatis corporis, est
+                dicta repellat cupiditate. Cupiditate corrupti illum,
+                necessitatibus saepe non ab placeat fugiat?
+              </p>
+              <button
+                class="bg-yellow-500 text-white cursor-pointer px-4 md:px-6 py-2 md:py-3 rounded-full uppercase font-bold hover:bg-yellow-600 transition duration-300 ease-in-out flex items-center justify-center gap-2 shadow-lg hover:shadow-yellow-500 text-sm md:text-base"
+                data-modal
+              >
+                contact us
+                <i class="bx bx-phone-call bx-tada"></i>
+              </button>
+            </div>
+          </div>
+          <!-- Slide 5 -->
+          <div class="min-w-full grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div
+              class="h-48 md:h-auto bg-[url('images/gallery5.jpeg')] border-2 border-yellow-500 rounded-4xl bg-cover bg-center bg-no-repeat"
+            ></div>
+            <div class="p-5 text-white">
+              <h2 class="text-2xl md:text-4xl font-bold mb-4">Culinary Art</h2>
+              <p class="mb-4 text-sm md:text-base">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae
+                obcaecati ea maxime esse suscipit at veritatis corporis, est
+                dicta repellat cupiditate. Cupiditate corrupti illum,
+                necessitatibus saepe non ab placeat fugiat?
+              </p>
+              <p class="mb-4 text-sm md:text-base">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae
+                obcaecati ea maxime esse suscipit at veritatis corporis, est
+                dicta repellat cupiditate. Cupiditate corrupti illum,
+                necessitatibus saepe non ab placeat fugiat?
+              </p>
+              <button
+                class="bg-yellow-500 text-white cursor-pointer px-4 md:px-6 py-2 md:py-3 rounded-full uppercase font-bold hover:bg-yellow-600 transition duration-300 ease-in-out flex items-center justify-center gap-2 shadow-lg hover:shadow-yellow-500 text-sm md:text-base"
+                data-modal
+              >
+                contact us
+                <i class="bx bx-phone-call bx-tada"></i>
+              </button>
+            </div>
+          </div>
+          <!-- Slide 6 -->
+          <div class="min-w-full grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div
+              class="h-48 md:h-auto bg-[url('images/gallery6.jpeg')] border-2 border-yellow-500 rounded-4xl bg-cover bg-center bg-no-repeat"
+            ></div>
+            <div class="p-5 text-white">
+              <h2 class="text-2xl md:text-4xl font-bold mb-4">Perfect Taste</h2>
+              <p class="mb-4 text-sm md:text-base">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae
+                obcaecati ea maxime esse suscipit at veritatis corporis, est
+                dicta repellat cupiditate. Cupiditate corrupti illum,
+                necessitatibus saepe non ab placeat fugiat?
+              </p>
+              <p class="mb-4 text-sm md:text-base">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae
+                obcaecati ea maxime esse suscipit at veritatis corporis, est
+                dicta repellat cupiditate. Cupiditate corrupti illum,
+                necessitatibus saepe non ab placeat fugiat?
+              </p>
+              <button
+                class="bg-yellow-500 text-white cursor-pointer px-4 md:px-6 py-2 md:py-3 rounded-full uppercase font-bold hover:bg-yellow-600 transition duration-300 ease-in-out flex items-center justify-center gap-2 shadow-lg hover:shadow-yellow-500 text-sm md:text-base"
+                data-modal
+              >
+                contact us
+                <i class="bx bx-phone-call bx-tada"></i>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

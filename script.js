@@ -341,4 +341,41 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 2500)
       })
   })
+
+  // Gallery Slider
+  let gallerySlider = document.querySelector("#gallerySlider")
+  let galleryPrev = document.querySelector("#galleryPrev")
+  let galleryNext = document.querySelector("#galleryNext")
+  let currentSlideEl = document.querySelector("#currentSlide")
+  let totalSlidesEl = document.querySelector("#totalSlides")
+
+  let currentSlideIndex = 0
+  let totalSlides = gallerySlider.children.length
+
+  totalSlidesEl.textContent = totalSlides.toString().padStart(2, "0")
+
+  let updateSlider = () => {
+    gallerySlider.style.transform = `translateX(-${currentSlideIndex * 100}%)`
+    currentSlideEl.textContent = (currentSlideIndex + 1)
+      .toString()
+      .padStart(2, "0")
+  }
+
+  galleryNext.addEventListener("click", () => {
+    if (currentSlideIndex < totalSlides - 1) {
+      currentSlideIndex++
+    } else {
+      currentSlideIndex = 0
+    }
+    updateSlider()
+  })
+
+  galleryPrev.addEventListener("click", () => {
+    if (currentSlideIndex > 0) {
+      currentSlideIndex--
+    } else {
+      currentSlideIndex = totalSlides - 1
+    }
+    updateSlider()
+  })
 })
