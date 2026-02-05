@@ -29,8 +29,8 @@ document.addEventListener("DOMContentLoaded", () => {
   hideTabContent()
   showTabContent(0)
 
-  tabButtons.forEach((qiymat, index) => {
-    qiymat.addEventListener("click", () => {
+  tabButtons.forEach((btn, index) => {
+    btn.addEventListener("click", () => {
       hideTabContent()
       showTabContent(index)
     })
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }, 1500)
 
   // Timer
-  let deadline = "2025-04-30"
+  let deadline = "2026-08-13"
 
   let getTimeRemaining = (endtime) => {
     let time = Date.parse(endtime) - Date.parse(new Date())
