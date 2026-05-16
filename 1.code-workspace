@@ -7,5 +7,7 @@
 			"path": "../22-dars. Restaurant Starter File/img"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "foodlover"
+	}
 }
